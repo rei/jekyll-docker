@@ -3,7 +3,7 @@ FROM ruby:2.4
 RUN apt-get update
 RUN apt-get install -y node python-pygments
 
-RUN gem install --no-ri --no-rdoc jekyll:3.4.3 rdiscount kramdown minima jekyll-feed
+RUN gem install --no-ri --no-rdoc jekyll:3.4.3 rdiscount kramdown minima jekyll-feed rouge
 
 ENV JEKYLL_HOME /data
 RUN addgroup jekyll --gid 500 && mkdir -p $JEKYLL_HOME && \
