@@ -1,3 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xv
 cd /data
-exec jekyll $@
+jekyll $@
+chmod -R 655 _site
