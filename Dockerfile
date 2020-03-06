@@ -1,9 +1,9 @@
 FROM ruby:2.4
 
-RUN apt-get update
-RUN apt-get install -y node python-pygments
+RUN apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update
+RUN apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false install -y nodejs python-pygments
 
-RUN gem install --no-ri --no-rdoc jekyll:3.6.2 rdiscount kramdown minima jekyll-feed rouge octokit jekyll-paginate
+RUN gem install --no-document jekyll:3.6.2 rdiscount kramdown minima jekyll-feed rouge octokit jekyll-paginate
 
 ENV JEKYLL_HOME /data
 RUN addgroup jekyll --gid 500 && mkdir -p $JEKYLL_HOME && \
@@ -14,6 +14,5 @@ USER jekyll
 
 VOLUME /data
 EXPOSE 4000
-
-WORKDIR /data
-ENTRYPOINT ["jekyll"]
+COPY ./run-jekyll.sh /
+ENTRYPOINT ["/run-jekyll.sh"]
